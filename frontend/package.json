@@ -1,0 +1,50 @@
+{
+    "name": "rootgulp",
+    "version": "0.0.1",
+    "description": "root gulp",
+    "main": "index.js",
+    "scripts": {
+        "init": "cnpm install",
+        "start": "gulp dev --dev",
+        "publish": "gulp publish",
+        "p": "gulp publish",
+        "dev": "cnpm install && gulp dev",
+        "server":"gulp dev"
+    },
+    "projects": [
+        "hellosocket"
+    ],
+    "host": "172.16.9.142",
+    "author": "chengda",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.18.8",
+        "del": "^2.2.2",
+        "gulp": "^3.9.1",
+        "gulp-autoprefixer": "^3.1.1",
+        "gulp-changed": "^2.0.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-declare": "^0.3.0",
+        "gulp-excel2json": "^1.0.5",
+        "gulp-imagemin": "^3.1.1",
+        "gulp-inject": "^4.2.0",
+        "gulp-jade": "^1.1.0",
+        "gulp-minify-css": "^1.2.4",
+        "gulp-notify": "^3.0.0",
+        "gulp-plumber": "^1.1.0",
+        "gulp-pug": "^3.3.0",
+        "gulp-pug-job": "0.0.2",
+        "gulp-rename": "^1.2.2",
+        "gulp-rev-hash3": "^1.0.9",
+        "gulp-sourcemaps": "^2.6.0",
+        "gulp-stylus": "^2.6.0",
+        "gulp-uglify": "^2.1.2",
+        "gulp.spritesmith": "^6.4.0",
+        "lodash": "^4.17.4",
+        "merge-stream": "^1.0.1",
+        "run-sequence": "^1.2.2",
+        "stream-series": "^0.1.1",
+        "vinyl-buffer": "^1.0.0",
+        "yargs": "^8.0.1"
+    }
+}

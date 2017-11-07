@@ -1,0 +1,157 @@
+// 设置变量
+
+@import "variables.styl"
+@import "functions.styl"
+@import "mixins.styl"
+@import "h5bp.styl"
+
+*
+    box-sizing border-box
+
+.top_bar
+    z-index 3
+    fixed-top 0
+    width: 100%
+    position: relative
+
+
+[title^="站长"]
+    display: none
+
+body
+    margin 0
+    padding 0
+    background #fff
+    font-family $main-font-family
+    font-size px(14)
+
+html
+    font-size 20px
+
+ul
+    margin 0
+    padding: 0
+    font-style: normal
+    list-style: none
+
+    li
+        padding: 0
+        margin: 0
+
+.clearfix
+    &::after
+        display: block;
+        content: "";
+        clear: both;
+
+.pull-left
+    float left
+
+.pull-right
+    float right
+
+img
+    max-width: 100%
+    vertical-align: top
+
+.toast-container
+    z-index $loading-z-index - 1
+    fixed-top 30%
+    left auto
+    right auto
+    margin auto
+    width 100%
+    text-align center
+    pointer-events: none
+
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    align-content center
+
+.toast
+    position relative
+    margin-bottom px(8)
+    padding px(18) px(40)
+
+    width auto
+    height auto
+
+    border-radius px(12)
+    font-size px(24)
+
+    word-break: break-all;
+
+    background rgba(0, 0, 0, .8)
+    color #fff
+
+.container
+    display: flex
+    justify-content: flex-start
+    flex-direction column
+
+    width: 100%
+    margin auto
+
+.icon-logo
+    display: inline-block
+
+$gap = px(20)
+.icon-icon
+    abs-left($gap)
+    top auto
+    bottom px(-20)
+
+a.btn.wait
+    background #ddd !important
+    color #fff !important
+
+@keyframes up-down {
+    0% {
+        transform: translate3d(0, 0, 0)
+    }
+    50% {
+        transform: translate3d(0, px(140), 0)
+    }
+    100% {
+        transform: translate3d(0, 0, 0)
+    }
+}
+
+
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(.97, .97, .97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.bounceIn
+    animation bounceIn 700ms

@@ -1,0 +1,16 @@
+{
+    "name": "hellosocket",
+    "version": "0.0.1",
+    "description": "hellosocket",
+    "main": "index.js",
+    "scripts": {},
+    "config": {
+        "port": 8083,
+        "nojade": false,
+        "dist": "/Users/mada/Projects/demo/socket",
+        "spriteNames": []
+    },
+    "author": "chengda",
+    "license": "ISC",
+    "devDependencies": {}
+}

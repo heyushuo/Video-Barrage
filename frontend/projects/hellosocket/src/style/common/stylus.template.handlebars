@@ -1,0 +1,164 @@
+{
+  // Default options
+  'functions': true,
+  'variableNameTransforms': ['underscored']
+}
+
+{{#block "sprites-comment"}}
+/*
+Stylus variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon_home_width;
+}
+
+The large array-like variables contain all information about a single icon
+$icon_home = x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet = width height image $spritesheet_sprites;
+*/
+{{/block}}
+{{#block "sprites"}}
+{{#each sprites}}
+${{strings.name_name}} = '{{name}}';
+${{strings.name_x}} = {{px2Rem px.x}};
+${{strings.name_y}} = {{px2Rem px.y}};
+${{strings.name_offset_x}} = {{px2Rem px.offset_x}};
+${{strings.name_offset_y}} = {{px2Rem px.offset_y}};
+${{strings.name_width}} = {{px2Rem px.width}};
+${{strings.name_height}} = {{px2Rem px.height}};
+${{strings.name_total_width}} = {{px2Rem px.total_width}};
+${{strings.name_total_height}} = {{px2Rem px.total_height}};
+${{strings.name_image}} = '{{{escaped_image}}}';
+${{strings.name}} = {{px2Rem px.x}} {{px2Rem px.y}} {{px2Rem px.offset_x}} {{px2Rem px.offset_y}} {{px2Rem px.width}} {{px2Rem px.height}} {{px2Rem px.total_width}} {{px2Rem px.total_height}} '{{{escaped_image}}}?v=5' '{{name}}';
+{{/each}}
+{{/block}}
+{{#block "spritesheet"}}
+${{spritesheet_info.strings.name_width}} = {{px2Rem spritesheet.px.width}};
+${{spritesheet_info.strings.name_height}} = {{px2Rem spritesheet.px.height}};
+${{spritesheet_info.strings.name_image}} = '{{{px2Rem spritesheet.escaped_image}}}';
+${{spritesheet_info.strings.name_sprites}} ={{#each sprites}} ${{strings.name}}{{/each}};
+${{spritesheet_info.strings.name}} = {{px2Rem spritesheet.px.width}} {{px2Rem spritesheet.px.height}} '{{{spritesheet.escaped_image}}}' ${{spritesheet_info.strings.name_sprites}};
+{{/block}}
+
+{{#block "sprite-functions-comment"}}
+{{#if options.functions}}
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  spriteWidth($icon_home)
+}
+
+.icon-email {
+  sprite($icon_email)
+}
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+{{/if}}
+{{/block}}
+{{#block "sprite-functions"}}
+{{#if options.functions}}
+spriteWidth($sprite) {
+  width: $sprite[4];
+}
+
+spriteHeight($sprite) {
+  height: $sprite[5];
+}
+
+spritePosition($sprite) {
+  background-position: $sprite[2] $sprite[3];
+}
+
+spriteSize($sprite) {
+  background-size: $sprite[6] $sprite[7];
+}
+
+spriteImage($sprite) {
+  background-image: url($sprite[8]);
+}
+
+sprite($sprite) {
+  spriteImage($sprite)
+  spritePosition($sprite)
+  spriteSize($sprite)
+  spriteWidth($sprite)
+  spriteHeight($sprite)
+}
+{{/if}}
+{{/block}}
+
+{{#block "spritesheet-functions-comment"}}
+{{#if options.functions}}
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of Stylus
+
+This must be run when you have at least 2 sprites.
+  If run with a single sprite, then there will be reference errors.
+
+sprites($spritesheet_sprites);
+*/
+{{/if}}
+{{/block}}
+{{#block "spritesheet-functions"}}
+{{#if options.functions}}
+sprites($sprites) {
+  for $sprite in $sprites {
+    $sprite_name = $sprite[9];
+    .{$sprite_name} {
+      sprite($sprite);
+    }
+  }
+}
+{{/if}}
+{{/block}}
+
+{{#each sprites}}
+{{#hasHover strings.name}}
+.icon-{{name}}
+  position relative
+  spriteWidth(${{strings.name}})
+  spriteHeight(${{strings.name}})
+
+  &:before
+    content: " "
+    position absolute
+    left 0
+    top 0
+    sprite(${{noHover strings.name}})
+
+  &:after
+    z-index 1
+    opacity 0
+    content: " "
+    position absolute
+    left 0
+    top 0
+    sprite(${{strings.name}})
+
+  &:hover,&.active
+    &:after
+      opacity 1
+
+{{else}}
+.icon-{{name}}
+  sprite(${{strings.name}});
+{{/hasHover}}
+{{/each}}

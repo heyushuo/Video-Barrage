@@ -1,0 +1,17 @@
+{
+  "name": "socket",
+  "version": "0.0.1",
+  "description": "socket demo server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node hellosocket/index.js"
+  },
+  "author": "chengda",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.15.2",
+    "opn": "^5.1.0",
+    "socket.io": "^2.0.4"
+  }
+}

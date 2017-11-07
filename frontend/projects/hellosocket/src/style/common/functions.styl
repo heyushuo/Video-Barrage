@@ -1,0 +1,13 @@
+px($px)
+    return ($px/40)rem
+    
+img-path($path)
+    $path = replace('../image', '', $path)
+    $path = pathjoin('../image', $path)
+    return $path
+    
+img-width($path)
+    return px(image-size(img-path($path))[0])
+    
+img-height($path)
+    return px(image-size(img-path($path))[1])
